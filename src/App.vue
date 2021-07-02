@@ -19,7 +19,7 @@ export default {
     return {
       item: null,
       items: [],
-      condition: false,
+      condition: true,
       finished: null
     }
   },
@@ -39,9 +39,9 @@ export default {
       this.items.splice(e, 1)
     },
     finishedTask() {
-      this.condition=!this.condition
       if(this.condition == false ? this.finished='none': this.finished='line-through') {
-      }
+        this.condition=!this.condition
+        }
     }
   }
 }
