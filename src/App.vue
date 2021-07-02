@@ -1,17 +1,48 @@
 <template>
   <div id="app">
     <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+    <div>
+      <h1>To Do List Vue.js</h1>
+      <ul>
+        <li v-for="(task, index) in items" :key="index"><h3 :style="{ textDecoration: finished}"> {{task}}  <button @click="finishedTask()">Finished</button> <button @click="removeTask()"> X </button></h3></li>
+      </ul>
+      <input @keyup.enter="addTask()" v-model="item">
+      <button @click="addTask()">Add Task</button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
 export default {
   name: 'App',
-  components: {
-    HelloWorld
+  data() {
+    return {
+      item: null,
+      items: [],
+      condition: false,
+      finished: null
+    }
+  },
+  computed:{
+    
+  },
+  methods: {
+    addTask() {
+      if(this.item === null) {
+        return;
+      } else {
+        this.items.push(this.item)
+        this.item = null
+      }
+    },
+    removeTask(e) {
+      this.items.splice(e, 1)
+    },
+    finishedTask() {
+      this.condition=!this.condition
+      if(this.condition == false ? this.finished='none': this.finished='line-through') {
+      }
+    }
   }
 }
 </script>
@@ -24,5 +55,8 @@ export default {
   text-align: center;
   color: #2c3e50;
   margin-top: 60px;
+}
+li {
+  list-style-type: none;
 }
 </style>
