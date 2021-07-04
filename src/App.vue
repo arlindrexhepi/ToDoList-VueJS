@@ -4,7 +4,7 @@
     <div>
       <h1>To Do List Vue.js</h1>
       <ul>
-        <li v-for="(task, index) in items" :key="index"><h3 :style="{ textDecoration: finished}"> {{task}}  <button @click="finishedTask()">Finished</button> <button @click="removeTask()"> X </button></h3></li>
+        <li v-for="(task, index) in items" :key="index"><h3 :style="{ textDecoration: finished}"> {{task}}  <button @click="finishedTask()">Finished</button> <button @click="editTask(index)">Edit</button> <button @click="removeTask(index)"> X </button></h3></li>
       </ul>
       <input @keyup.enter="addTask()" v-model="item">
       <button @click="addTask()">Add Task</button>
@@ -20,7 +20,8 @@ export default {
       item: null,
       items: [],
       condition: true,
-      finished: null
+      finished: null,
+      editIndex: null
     }
   },
   computed:{
@@ -35,9 +36,15 @@ export default {
         this.item = null
       }
     },
-    removeTask(e) {
-      this.items.splice(e, 1)
+    //EDIT TASK IS NOT COMPLETED
+    editTask(index) {
+      this.editIndex = this.items[index]
+      console.log(this.items[index])
     },
+    removeTask(index) {
+      this.items.splice(index, 1)
+    },
+    // IT CHANGES THE STYLE TO ALL ELEMENTS
     finishedTask() {
       if(this.condition == false ? this.finished='none': this.finished='line-through') {
         this.condition=!this.condition
