@@ -1,12 +1,12 @@
 <template>
   <div id="app">
-    <b-container my="3">
-      <b-form-row>
-        <h1>To Do List Vue.js</h1>
-        <b-form-input @keyup.enter="addTask()" v-model="item" />
-        <b-button variant="outline-primary" @click="addTask()">Add Task</b-button> 
+    <b-container>
+      <b-form-row style="opacity=0.8">
+        <h1 @click="inputState=!inputState" :style="{cursor: cursor}">To Do List Vue.js</h1>
+        <b-form-input class="mx-auto w-50" v-if="inputState" @keyup.enter="addTask()" v-model="item" />
+        <b-button class="my-3" variant="outline-primary" @click="addTask()">Add Task</b-button> 
         <ul>
-          <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
+          <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
         </ul>
       </b-form-row>
     </b-container>
@@ -16,10 +16,8 @@
 <script>
 import Vue from 'vue'
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
-
 import 'bootstrap/dist/css/bootstrap.css'
 import 'bootstrap-vue/dist/bootstrap-vue.css'
-
 Vue.use(BootstrapVue)
 Vue.use(IconsPlugin)
 export default {
@@ -28,6 +26,7 @@ export default {
     return {
       item: null,
       items: [],
+      inputState: false,
       condition: true,
       editIndex: null,
       cursor: 'pointer'
@@ -38,12 +37,18 @@ export default {
   },
   methods: {
     addTask() {
-      if(this.item.name === null) {
+      if(this.inputState === false){
+        this.inputState =!this.inputState
+      } else {
+        if(this.item.name === null) {
         return;
       } else {
         this.items.unshift({name: this.item, finished:false})
         this.item=null
       }
+      return
+      }
+      
     },
     removeTask(index) {
       this.items.splice(index, 1)
@@ -53,7 +58,12 @@ export default {
 </script>
 
 <style>
+html {
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+}
 #app {
+  opacity: 0.7;
+  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -62,11 +72,16 @@ export default {
   margin-top: 60px;
 }
 li {
+  color: whitesmoke;
   list-style-type: none;
   cursor: pointer;
   font-weight: bolder;
 }
 .finished {
   text-decoration: line-through;
+}
+h1 {
+  font-weight: bolder;
+  color: whitesmoke;
 }
 </style>
