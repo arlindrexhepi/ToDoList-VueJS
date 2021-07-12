@@ -1,13 +1,12 @@
 <template>
   <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
     <div>
       <h1>To Do List Vue.js</h1>
-      <ul>
-        <li v-for="(task, index) in items" :key="index"><h3 :style="{ textDecoration: finished}"> {{task}}  <button @click="finishedTask()">Finished</button> <button @click="editTask(index)">Edit</button> <button @click="removeTask(index)"> X </button></h3></li>
-      </ul>
       <input @keyup.enter="addTask()" v-model="item">
       <button @click="addTask()">Add Task</button>
+      <ul>
+        <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" @click="task.finished=!task.finished"><h3> {{task.name}} <button @click="editTask(index)">Edit</button> <button @click="removeTask(index)"> X </button></h3></li>
+      </ul>
     </div>
   </div>
 </template>
@@ -20,8 +19,8 @@ export default {
       item: null,
       items: [],
       condition: true,
-      finished: null,
-      editIndex: null
+      editIndex: null,
+      cursor: 'pointer'
     }
   },
   computed:{
@@ -29,26 +28,15 @@ export default {
   },
   methods: {
     addTask() {
-      if(this.item === null) {
+      if(this.item.name === null) {
         return;
       } else {
-        this.items.push(this.item)
-        this.item = null
+        this.items.unshift({name: this.item, finished:false})
+        this.item=null
       }
-    },
-    //EDIT TASK IS NOT COMPLETED
-    editTask(index) {
-      this.editIndex = this.items[index]
-      console.log(this.items[index])
     },
     removeTask(index) {
       this.items.splice(index, 1)
-    },
-    // IT CHANGES THE STYLE TO ALL ELEMENTS
-    finishedTask() {
-      if(this.condition == false ? this.finished='none': this.finished='line-through') {
-        this.condition=!this.condition
-        }
     }
   }
 }
@@ -65,5 +53,10 @@ export default {
 }
 li {
   list-style-type: none;
+  cursor: pointer;
+  font-weight: bolder;
+}
+.finished {
+  text-decoration: line-through;
 }
 </style>
