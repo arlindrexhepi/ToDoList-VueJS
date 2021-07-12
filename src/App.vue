@@ -1,17 +1,27 @@
 <template>
   <div id="app">
-    <div>
-      <h1>To Do List Vue.js</h1>
-      <input @keyup.enter="addTask()" v-model="item">
-      <button @click="addTask()">Add Task</button>
-      <ul>
-        <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" @click="task.finished=!task.finished"><h3> {{task.name}} <button @click="editTask(index)">Edit</button> <button @click="removeTask(index)"> X </button></h3></li>
-      </ul>
-    </div>
+    <b-container my="3">
+      <b-form-row>
+        <h1>To Do List Vue.js</h1>
+        <b-form-input @keyup.enter="addTask()" v-model="item" />
+        <b-button variant="outline-primary" @click="addTask()">Add Task</b-button> 
+        <ul>
+          <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
+        </ul>
+      </b-form-row>
+    </b-container>
   </div>
 </template>
 
 <script>
+import Vue from 'vue'
+import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'
+
+import 'bootstrap/dist/css/bootstrap.css'
+import 'bootstrap-vue/dist/bootstrap-vue.css'
+
+Vue.use(BootstrapVue)
+Vue.use(IconsPlugin)
 export default {
   name: 'App',
   data() {
