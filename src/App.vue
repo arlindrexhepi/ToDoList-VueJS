@@ -1,9 +1,9 @@
 <template>
   <div id="app">
     <b-container>
-      <b-form-row style="opacity=0.8">
+      <b-form-row>
         <h1 @click="inputState=!inputState" :style="{cursor: cursor}">{{appName}}</h1>
-        <b-form-input class="mx-auto w-50" placeholder="Add New Tasks" v-if="inputState" @keyup.enter="addTask()" v-model="item" /> 
+        <b-form-input class="mx-auto w-50, inputField" placeholder="Add New Tasks" v-if="inputState" @keyup.enter="addTask()" v-model="item" /> 
         <b-button class="my-3" variant="outline-primary" @click="addTask()">Add Task</b-button> 
         <ul>
           <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
@@ -87,5 +87,8 @@ li {
 h1 {
   font-weight: bolder;
   color: #1d3557;
+}
+.inputField {
+  box-shadow: 5px 5px 5px #1d3557;
 }
 </style>
