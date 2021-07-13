@@ -3,7 +3,7 @@
     <b-container>
       <b-form-row style="opacity=0.8">
         <h1 @click="inputState=!inputState" :style="{cursor: cursor}">To Do List Vue.js</h1>
-        <b-form-input class="mx-auto w-50" v-if="inputState" @keyup.enter="addTask()" v-model="item" />
+        <b-form-input class="mx-auto w-50" placeholder="Add New Tasks" v-if="inputState" @keyup.enter="addTask()" v-model="item" />
         <b-button class="my-3" variant="outline-primary" @click="addTask()">Add Task</b-button> 
         <ul>
           <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
@@ -62,8 +62,7 @@ html {
   background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
 }
 #app {
-  opacity: 0.7;
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(90deg, #fefae0 0%, #f1faee 35%, #f1faee 90%, #fefae0 100%);
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
@@ -72,7 +71,7 @@ html {
   margin-top: 60px;
 }
 li {
-  color: whitesmoke;
+  color: #1d3557;
   list-style-type: none;
   cursor: pointer;
   font-weight: bolder;
@@ -82,6 +81,6 @@ li {
 }
 h1 {
   font-weight: bolder;
-  color: whitesmoke;
+  color: #1d3557;
 }
 </style>
