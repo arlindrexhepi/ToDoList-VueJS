@@ -8,6 +8,7 @@
         <ul>
           <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
         </ul>
+        <b-button v-if="items.length>0" class="my-3" variant="outline-primary" @click="clearAll()">Clear All</b-button> 
       </b-form-row>
     </b-container>
   </div>
@@ -52,6 +53,9 @@ export default {
     },
     removeTask(index) {
       this.items.splice(index, 1)
+    },
+    clearAll() {
+      this.items = []
     }
   }
 }
@@ -78,6 +82,7 @@ li {
 }
 .finished {
   text-decoration: line-through;
+  color: gray;
 }
 h1 {
   font-weight: bolder;
