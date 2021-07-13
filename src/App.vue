@@ -59,7 +59,7 @@ export default {
 
 <style>
 html {
-  background: linear-gradient(90deg, rgba(2,0,36,1) 0%, rgba(9,9,121,1) 35%, rgba(0,212,255,1) 100%);
+  background: linear-gradient(90deg,#1d3557 5%, #457b9d 35%, #a8dadc 95%, #e63946 100%);
 }
 #app {
   background: linear-gradient(90deg, #fefae0 0%, #f1faee 35%, #f1faee 90%, #fefae0 100%);
@@ -67,7 +67,7 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
+  color: #1d3557;
   margin-top: 60px;
 }
 li {
