@@ -2,8 +2,8 @@
   <div id="app">
     <b-container>
       <b-form-row style="opacity=0.8">
-        <h1 @click="inputState=!inputState" :style="{cursor: cursor}">To Do List Vue.js</h1>
-        <b-form-input class="mx-auto w-50" placeholder="Add New Tasks" v-if="inputState" @keyup.enter="addTask()" v-model="item" />
+        <h1 @click="inputState=!inputState" :style="{cursor: cursor}">{{appName}}</h1>
+        <b-form-input class="mx-auto w-50" placeholder="Add New Tasks" v-if="inputState" @keyup.enter="addTask()" v-model="item" /> 
         <b-button class="my-3" variant="outline-primary" @click="addTask()">Add Task</b-button> 
         <ul>
           <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
@@ -25,6 +25,7 @@ export default {
   name: 'App',
   data() {
     return {
+      appName: 'To Do List Vue.js!',
       item: null,
       items: [],
       inputState: false,
@@ -49,7 +50,6 @@ export default {
       }
       return
       }
-      
     },
     removeTask(index) {
       this.items.splice(index, 1)
