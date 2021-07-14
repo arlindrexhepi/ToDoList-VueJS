@@ -6,7 +6,7 @@
         <b-form-input class="mx-auto w-50, inputField" placeholder="Add New Tasks" v-if="inputState" @keyup.enter="addTask()" v-model="item" /> 
         <b-button class="my-3" variant="outline-primary" @click="addTask()">Add Task</b-button> 
         <ul>
-          <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click="removeTask(index)"> X </b-button></h3></li>
+          <li v-for="(task, index) in items" :key="index" :class="{finished: task.finished}" class="my-3" @click="task.finished=!task.finished"><h3> {{task.name}}  <b-button variant="outline-danger" @click.stop="removeTask(index)"> X </b-button></h3></li>
         </ul>
         <b-button v-if="items.length>0" class="my-3" variant="outline-primary" @click="clearAll()">Clear All</b-button> 
       </b-form-row>
